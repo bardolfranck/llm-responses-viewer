@@ -358,11 +358,11 @@
         <div class="navigation-buttons">
             <button class="btn prev-btn" onclick="previousQuestion()">
                 <span class="btn-icon">←</span>
-                Question précédente
+                Previous Question
             </button>
             <button class="btn change-btn" onclick="changeQuestion()">
                 <span class="btn-icon">→</span>
-                Question suivante
+                Next Question
             </button>
         </div>
         <div id="question-counter" style="margin-left: 15px; font-size: 14px; color: #666;"></div>
@@ -391,7 +391,7 @@
                 </div>
                 <span class="separator" style="display: none;">→</span>
                 <div class="response-classification" style="display: none;">
-                    <span class="heading-label">Classification de la réponse:</span>
+                    <span class="heading-label">Classification (answer):</span>
                     <div class="class-wrapper">
                         <span class="color-indicator color-négatif"></span> 
                         <span class="negatif classification">négatif</span>
@@ -415,15 +415,15 @@
                 <div class="response-title">
                     <span class="heading-label">Contexte</span>
                     <span class="context-badge badge-neutre" style="display: none;">
-                        <span class="classification">neutre</span>
+                        <span class="classification">neutral</span>
                     </span>
                 </div>
                 <span class="separator" style="display: none;">→</span>
                 <div class="response-classification" style="display: none;">
-                    <span class="heading-label">Classification de la réponse:</span>
+                    <span class="heading-label">Classification (answer):</span>
                     <div class="class-wrapper">
                         <span class="color-indicator color-neutre"></span> 
-                        <span class="neutre classification">neutre</span>
+                        <span class="neutre classification">neutral</span>
                     </div>
                 </div>
             </div>
@@ -431,7 +431,7 @@
                 DOMAINE
             </div>
         </div>
-        <div class="prompt">Chargement automatique en cours...</div>
+        <div class="prompt">Loading...</div>
         <div class="response-content">
             <p>Veuillez patienter...</p>
         </div>
@@ -444,15 +444,15 @@
                 <div class="response-title">
                     <span class="heading-label">Contexte</span>
                     <span class="context-badge badge-positif" style="display: none;">
-                        <span class="classification">positif</span>
+                        <span class="classification">positive</span>
                     </span>
                 </div>
                 <span class="separator" style="display: none;">→</span>
                 <div class="response-classification" style="display: none;">
-                    <span class="heading-label">Classification de la réponse:</span>
+                    <span class="heading-label">Classification (answer):</span>
                     <div class="class-wrapper">
                         <span class="color-indicator color-positif"></span> 
-                        <span class="positif classification">positif</span>
+                        <span class="positif classification">positive</span>
                     </div>
                 </div>
             </div>
@@ -460,16 +460,16 @@
                 DOMAINE
             </div>
         </div>
-        <div class="prompt">Chargement automatique en cours...</div>
+        <div class="prompt">Loading...</div>
         <div class="response-content">
-            <p>Veuillez patienter...</p>
+            <p>wait...</p>
         </div>
     </div>
     
     <div class="analysis" id="analysis-section" style="display: none;">
-        <h3>Analyse des différences</h3>
+        <h3>Analysis</h3>
         <ul>
-            <li>Chargement des données en cours...</li>
+            <li>Load...</li>
         </ul>
     </div>
 
@@ -660,13 +660,13 @@
             
             // Vérifier que la question a bien les 3 contextes
             const availableContexts = Object.keys(question.contexts);
-            if (!availableContexts.includes('négatif') || !availableContexts.includes('neutre') || !availableContexts.includes('positif')) {
+            if (!availableContexts.includes('negative') || !availableContexts.includes('neutral') || !availableContexts.includes('positive')) {
                 debugContent.innerHTML += `<br><span style="color: red;">❌ ERREUR: Contextes manquants!</span>`;
                 return;
             }
             
             // Afficher les 3 contextes : négatif, neutre, positif
-            const contextOrder = ['négatif', 'neutre', 'positif'];
+            const contextOrder = ['negative', 'neutral', 'positive'];
             
             contextOrder.forEach(contextType => {
                 const context = question.contexts[contextType];
@@ -857,7 +857,7 @@
                             }
                             
                             // Séparateur avant positif
-                            if (ton === 'positif' && question.analysis.length > 0 && !question.analysis.includes('separator')) {
+                            if (ton === 'positive' && question.analysis.length > 0 && !question.analysis.includes('separator')) {
                                 question.analysis.push('separator');
                             }
                             
@@ -871,7 +871,7 @@
                     
                     // Vérifier qu'on a les 3 contextes
                     const contextKeys = Object.keys(question.contexts);
-                    if (contextKeys.length === 3 && contextKeys.includes('négatif') && contextKeys.includes('neutre') && contextKeys.includes('positif')) {
+                    if (contextKeys.length === 3 && contextKeys.includes('négatif') && contextKeys.includes('neutral') && contextKeys.includes('positive')) {
                         questionDatabase.push(question);
                         console.log(`    ✅ Question ajoutée avec contextes: ${contextKeys.join(', ')}`);
                     } else {
