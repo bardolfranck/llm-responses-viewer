@@ -490,13 +490,13 @@
             updateLoadingStatus("📄 Chargement automatique des données...");
             document.getElementById('loading-status').style.display = 'block';
             
-            fetch('./output-LLM.csv')
+            fetch('./output-LLM-EN.csv')
                 .then(response => {
                     if (!response.ok) throw new Error(`HTTP ${response.status}`);
                     return response.text();
                 })
                 .then(csvText => {
-                    processCSVData(csvText, 'output-LLM.csv (auto-chargé)');
+                    processCSVData(csvText, 'output-LLM-EN.csv (auto-chargé)');
                 })
                 .catch(error => {
                     console.error('Auto-chargement échoué:', error);
